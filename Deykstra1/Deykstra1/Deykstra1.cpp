@@ -6,7 +6,7 @@
 
 using namespace std;
 
-bool is_in_vector(vector<string> processed, string node) {
+bool is_in_vector(vector<string>& processed, string node) {
     for (auto iter = processed.begin(); iter != processed.end(); iter++)
     {
         if ((*iter) == node)
@@ -17,7 +17,7 @@ bool is_in_vector(vector<string> processed, string node) {
     return 0;
 }
 
-string find_cost_node(map<string, int>& costs, vector<string> processed) {
+string find_cost_node(map<string, int>& costs, vector<string>& processed) {
     int lowest_cost = std::numeric_limits<int>::max();
     string lowest_cost_node = "";
 
@@ -32,7 +32,7 @@ string find_cost_node(map<string, int>& costs, vector<string> processed) {
     return lowest_cost_node;
 }
 
-int deykstra(map<string, int>& costs, map<string, map<string, int>> graph, map<string, string> parents, vector<string> processed) {
+int deykstra(map<string, int>& costs, map<string, map<string, int>>& graph, map<string, string>& parents, vector<string>& processed) {
     string node = find_cost_node(costs, processed);
     while (node != "")
     {
@@ -46,7 +46,7 @@ int deykstra(map<string, int>& costs, map<string, map<string, int>> graph, map<s
             }
         }
         processed.push_back(node);
-        string node = find_cost_node(costs, processed);
+        node = find_cost_node(costs, processed);
     }
     return costs["fin"];
 }
